@@ -1,0 +1,23 @@
+; BIND db file for 
+$TTL 5
+$ORIGIN valid.keyrollover.ch.
+@       IN      SOA     ns.valid.keyrollover.ch. admins.glevia.com. (
+                        2023072500      ; serial
+                        5       ; refresh after 5 seconds
+                        20      ; retry after 20 seconds
+                        604800  ; expire after 1 week
+                        5 )     ; minimum TTL of 5 seconds
+
+@       IN      NS      ns.valid.keyrollover.ch.
+
+@                       IN      A       37.59.51.141
+@                       IN      AAAA    2001:41d0:8:6ed8::80
+
+*.valid.keyrollover.ch.	IN	A       103.162.143.52
+*.valid.keyrollover.ch.	IN	AAAA    2a0e:5040:1002::52
+*.valid.keyrollover.ch.	IN	TXT    "This is a random record!"
+
+
+ns IN A 103.162.143.52
+ns IN AAAA 2a0e:5040:1002::52
+

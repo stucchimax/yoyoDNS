@@ -1,0 +1,5 @@
+dnspython
+python-dotenv
+requests
+ripe.atlas.cousteau
+sqlite3
