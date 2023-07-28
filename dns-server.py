@@ -109,7 +109,7 @@ def handle_connection(sock, is_tcp):
     
     qname = query.question[0].name
 
-    uuid = str(qname).split(".")[0]
+    uuid = str(qname).split(".")[0].lower()
 
     print("The uuid is {}".format(uuid))
     print(client_addrport)
