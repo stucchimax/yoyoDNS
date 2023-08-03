@@ -162,7 +162,7 @@ for asn in asns:
                             print("Measurement accepted, with id: {}".format(response['measurements'][0]))
                             done = True
 
-                            query = "INSERT INTO measurements values('{}', '{}', '', '{}', '{}', '{}', '{}', '6')".format(host_uuid, asn, ts, response['measurements'][0], args.country, probe['id'])
+                            query = "INSERT INTO measurements values('{}', '{}', '{}', '{}', '{}', '{}', '6')".format(host_uuid, asn, ts, response['measurements'][0], args.country, probe['id'])
                     
                             con = sqlite3.connect('db.sql', check_same_thread=False)
                             con.execute(query)
