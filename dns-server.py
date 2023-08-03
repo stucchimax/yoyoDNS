@@ -120,11 +120,11 @@ def handle_connection(sock, is_tcp):
         dt = datetime.now()
         ts = datetime.timestamp(dt)
 
-        print("The uuid is {}".format(uuid))
+        print("The uuid is {}".format(uuid.group()))
         print(client_addrport)
         addr = client_addrport[0]
     
-        to_insert = "INSERT into queries VALUES ('{}', '{}', '{}')".format(uuid.group(), addr, ts)
+        to_insert = "INSERT into queries (uuid, ip_address, query_timestamp) VALUES ('{}', '{}', '{}')".format(uuid.group(), addr, ts)
     
         con = sqlite3.connect('db.sql', check_same_thread=False)
         con.execute(to_insert)
