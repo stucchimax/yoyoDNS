@@ -8,6 +8,10 @@ query = "CREATE TABLE measurements (uuid VARCHAR, asn INTEGER, ip_address VARCHA
 
 con.execute(query)
 
+query = "CREATE TABLE queries (uuid VARCHAR, ip_address VARCHAR, timestamp INTEGER)"
+
+con.execute(query)
+
 con.commit()
 
 con.close()

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import re
 import socket
 import select
 import sqlite3
@@ -13,6 +14,8 @@ import dns.rcode
 import dns.rdatatype
 import dns.rdataclass
 import dns.query
+
+from datetime import datetime
 
 SERVER = ''  # for all addresses
 PORT = 53
@@ -109,18 +112,24 @@ def handle_connection(sock, is_tcp):
     
     qname = query.question[0].name
 
-    uuid = str(qname).split(".")[0].lower()
-
-    print("The uuid is {}".format(uuid))
-    print(client_addrport)
-    addr = client_addrport[0]
-
-    to_update = "UPDATE measurements SET ip_address = '{}' WHERE uuid = '{}'".format(addr,uuid)
+    queried_name = str(qname).split(".")[0].lower()
+    # We need to match only UUIDs, like this one: e33ed847-5421-40a9-bb77-e570bfdfd74b
+    uuid = re.search("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", queried_name)
     
-    con = sqlite3.connect('db.sql', check_same_thread=False)
-    con.execute(to_update)
-    con.commit()
-    con.close()
+    if uuid is not None:
+        dt = datetime.now()
+        ts = datetime.timestamp(dt)
+
+        print("The uuid is {}".format(uuid))
+        print(client_addrport)
+        addr = client_addrport[0]
+    
+        to_insert = "INSERT into queries VALUES ('{}', '{}', '{}')".format(uuid, addr, ts)
+    
+        con = sqlite3.connect('db.sql', check_same_thread=False)
+        con.execute(to_insert)
+        con.commit()
+        con.close()
  
     response = resolve_query(query)
 
