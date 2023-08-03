@@ -124,7 +124,7 @@ def handle_connection(sock, is_tcp):
         print(client_addrport)
         addr = client_addrport[0]
     
-        to_insert = "INSERT into queries VALUES ('{}', '{}', '{}')".format(uuid, addr, ts)
+        to_insert = "INSERT into queries VALUES ('{}', '{}', '{}')".format(uuid.group(), addr, ts)
     
         con = sqlite3.connect('db.sql', check_same_thread=False)
         con.execute(to_insert)
