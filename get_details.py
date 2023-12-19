@@ -45,7 +45,7 @@ def main():
         #print(entry[1])
 
         ip_address = entry[1]
-
+        as_name = as_name.replace('"', '\"')
         asn, as_name, location = get_ip_details(ip_address)
         
         to_update = "UPDATE queries SET query_asn = '{}', query_as_name = '{}', query_location = '{}' WHERE uuid == '{}' AND ip_address = '{}'".format(asn, as_name, location, entry[0], ip_address)
