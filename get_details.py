@@ -28,7 +28,8 @@ def get_ip_details(ip_address):
     #print(asn)
     #print(as_name)
 
-    return(asn, as_name, details.loc)
+    location = "{},{}".format(details.longitude, details.latitude)
+    return(asn, as_name, location)
 
 
 def main():
