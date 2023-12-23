@@ -69,4 +69,4 @@ Once finished, you can find the results in the db.sql SQLite database, in the "m
 
 # Contacts
 
-For any question, don't hesitate to either open an issue on GitHub, or send an email to stucchi@isoc.org and siddiqui@isoc.org.
+For any question, don't hesitate to either open an issue on GitHub, or send an email to max@stucchi.ch.
