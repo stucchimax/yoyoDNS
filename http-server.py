@@ -14,7 +14,7 @@ def referer(request: Request):
     return address
 
 @app.get['/uuid/{dbase}/{uuid}']
-def uuid(request: Requesti, dbase, uuid):
+def uuid(request: Request, dbase, uuid):
     
     query = f"SELECT * from queries WHERE uuid=\"{uuid}\""
 
