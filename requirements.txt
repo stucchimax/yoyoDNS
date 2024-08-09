@@ -1,4 +1,5 @@
 dnspython
+fastapi
 python-dotenv
 requests
 ripe.atlas.cousteau
