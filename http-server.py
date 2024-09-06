@@ -16,7 +16,7 @@ async def referer(request: Request):
     return address
 
 @app.get['/uuid/{dbase}/{uuid}']
-async def uuid_check(request: Request, dbase, uuid):
+async def uuid_check(dbase, uuid):
     
     query = f"SELECT * from queries WHERE uuid=\"{uuid}\""
 
