@@ -20,7 +20,7 @@ async def uuid(request: Request, dbase, uuid):
     
     query = f"SELECT * from queries WHERE uuid=\"{uuid}\""
 
-    if os.path.isfile(f"{dbase}.sql")
+    if os.path.isfile(f"{dbase}.sql"):
         con = sqlite3.connect(f'{dbase}.sql', check_same_thread=False)
         res = con.execute(query)
 
