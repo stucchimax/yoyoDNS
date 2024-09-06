@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException, Request
 
 import os
 import sqlite3
+import uuid
 
 app = FastAPI()
 
@@ -15,10 +16,10 @@ async def referer(request: Request):
     address = request.headers.get('referer')
     return address
 
-@app.get['/uuid/{dbase}/{uuid}']
-async def uuid_check(dbase, uuid):
+@app.get('/uuid/{dbase}/{uuid}')
+async def uuid_check(dbase: str, uuid: uuid.uuid4):
     
-    query = f"SELECT * from queries WHERE uuid=\"{uuid}\""
+    query = f"SELECT * from queries WHERE uuid=\"{uuid}\";"
 
     if os.path.isfile(f"{dbase}.sql"):
         con = sqlite3.connect(f'{dbase}.sql', check_same_thread=False)
@@ -32,7 +33,7 @@ async def uuid_check(dbase, uuid):
     else:
         raise HTTPException(status_code=404, detail="Database not found") 
 
-@app.get['/dbase/{dbase}']
+@app.get('/dbase/{dbase}')
 async def dbase_create(request: Request, dbase):
 
     con = sqlite3.connect(f'{dbase}.sql', check_same_thread=False)
