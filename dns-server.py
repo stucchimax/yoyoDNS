@@ -115,7 +115,10 @@ def handle_connection(sock, is_tcp):
     queried_name = str(qname).split(".")[0].lower()
     # We need to match only UUIDs, like this one: e33ed847-5421-40a9-bb77-e570bfdfd74b
     uuid = re.search("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", queried_name)
-    
+
+    # We extract the DB from the queried name.
+    database =  str(qname).split(".")[1].lower()
+
     if uuid is not None:
         dt = datetime.now()
         ts = datetime.timestamp(dt)
@@ -126,7 +129,7 @@ def handle_connection(sock, is_tcp):
     
         to_insert = "INSERT into queries (uuid, ip_address, query_timestamp) VALUES ('{}', '{}', '{}')".format(uuid.group(), addr, ts)
     
-        con = sqlite3.connect('db.sql', check_same_thread=False)
+        con = sqlite3.connect(f'{database}.sql', check_same_thread=False)
         con.execute(to_insert)
         con.commit()
         con.close()
